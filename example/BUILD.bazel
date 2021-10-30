@@ -1,0 +1,25 @@
+load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+load("@rules_java//java:defs.bzl", "java_binary")
+load("@io_bazel_rules_kotlin//kotlin:lint.bzl", "ktlint_fix", "ktlint_test")
+
+kt_jvm_library(
+    name = "example_lib",
+    srcs = ["main.kt"],
+    visibility = ["//visibility:private"],
+)
+
+ktlint_test(
+    name = "lint_test",
+    srcs = glob(["**/*.kt"]),
+)
+
+ktlint_fix(
+    name = "lint_fix",
+    srcs = glob(["**/*.kt"]),
+)
+
+java_binary(
+    name = "example",
+    main_class = "com.krythera.example.MainKt",
+    runtime_deps = [":example_lib"],
+)
