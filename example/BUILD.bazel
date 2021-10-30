@@ -6,6 +6,7 @@ kt_jvm_library(
     name = "example_lib",
     srcs = ["main.kt"],
     visibility = ["//visibility:private"],
+    deps = ["@maven//:commons_cli_commons_cli"],
 )
 
 ktlint_test(
